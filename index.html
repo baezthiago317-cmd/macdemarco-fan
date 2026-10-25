@@ -49,11 +49,42 @@ nav a {
   text-transform:uppercase;
   text-decoration:none;
 }
-nav a:hover, a:hover {color:var(--orange)}
+nav a:hover,a:hover {color:var(--orange)}
 .hero {
   max-width:1200px;
   margin:auto;
-  padding:90px 8% 75px;
+  padding:75px 8% 65px;
+}
+.hero-layout {
+  display:grid;
+  grid-template-columns:1.05fr .95fr;
+  align-items:center;
+  gap:45px;
+}
+.hero-photo {
+  position:relative;
+  transform:rotate(1.5deg);
+  padding:10px 10px 35px;
+  background:#faf7ef;
+  box-shadow:0 5px 18px #293c3012;
+  border:1px solid var(--line);
+}
+.hero-photo img {
+  display:block;
+  width:100%;
+  height:390px;
+  object-fit:cover;
+  object-position:center 35%;
+  filter:saturate(.75);
+}
+.photo-label {
+  position:absolute;
+  bottom:6px;
+  left:0;
+  right:0;
+  text-align:center;
+  font-size:9px;
+  letter-spacing:1px;
 }
 .eyebrow {
   color:var(--orange);
@@ -63,27 +94,25 @@ nav a:hover, a:hover {color:var(--orange)}
 }
 h1,h2,h3,p {margin-top:0}
 h1 {
-  margin:32px 0;
-  font:500 clamp(70px,13vw,150px)/.87 'Playfair Display',serif;
-  letter-spacing:-6px;
+  margin:28px 0;
+  font:500 clamp(70px,10vw,130px)/.87 'Playfair Display',serif;
+  letter-spacing:-5px;
 }
 h1 em {color:var(--orange);font-weight:500}
-.intro {
-  max-width:550px;
-  font-size:13px;
-}
+.intro {max-width:550px;font-size:13px}
 .hero-bottom {
-  margin-top:50px;
+  margin-top:45px;
   display:flex;
   justify-content:space-between;
   align-items:end;
-  gap:35px;
+  gap:30px;
 }
 .hero-bottom p {max-width:440px}
 .stamp {
+  flex-shrink:0;
   border:1px solid var(--orange);
   color:var(--orange);
-  padding:15px 24px;
+  padding:12px 18px;
   text-align:center;
   transform:rotate(3deg);
   font-size:9px;
@@ -91,7 +120,7 @@ h1 em {color:var(--orange);font-weight:500}
 }
 .stamp strong {
   display:block;
-  font:500 29px 'Playfair Display',serif;
+  font:500 27px 'Playfair Display',serif;
 }
 section {
   padding:75px 8%;
@@ -113,66 +142,63 @@ h2 {
 .photo-grid {
   display:grid;
   grid-template-columns:1.2fr .8fr;
-  gap:18px;
+  gap:20px;
+  align-items:start;
 }
 .photo {
   position:relative;
-  min-height:270px;
   background:var(--card);
-  overflow:hidden;
+  padding:9px;
+  border:1px solid var(--line);
 }
+.photo:nth-child(2) {margin-top:55px;transform:rotate(1.2deg)}
+.photo:nth-child(1) {transform:rotate(-.7deg)}
 .photo img {
   display:block;
   width:100%;
-  height:100%;
-  min-height:270px;
+  height:340px;
   object-fit:cover;
-  filter:saturate(.75);
-  transition:transform .4s;
+  filter:saturate(.78);
+  transition:filter .3s,transform .4s;
 }
-.photo:hover img {transform:scale(1.03)}
+.photo:hover img {filter:saturate(1);transform:scale(1.01)}
 .photo figcaption {
-  position:absolute;
-  bottom:0;
-  left:0;
-  right:0;
-  color:white;
-  padding:35px 18px 14px;
-  background:linear-gradient(transparent,rgba(0,0,0,.6));
+  padding:12px 7px 5px;
   font-size:10px;
 }
 figure {margin:0}
+.note {
+  margin-top:25px;
+  font-size:10px;
+  color:var(--green);
+}
 .albums {
   display:grid;
   grid-template-columns:repeat(4,minmax(0,1fr));
-  gap:17px;
+  gap:22px 17px;
 }
-.album {text-decoration:none}
-.cover {
-  aspect-ratio:1;
-  padding:15px;
-  display:flex;
-  flex-direction:column;
-  justify-content:space-between;
-  transition:transform .2s;
+.album {
+  min-width:0;
+  text-decoration:none;
 }
-.album:hover .cover {transform:translateY(-5px) rotate(-1deg)}
-.cover span {font-size:9px}
-.cover strong {
-  font:500 clamp(23px,3vw,38px)/1 'Playfair Display',serif;
+.album iframe {
+  display:block;
+  width:100%;
+  height:152px;
+  border:0;
+  border-radius:8px;
+  background:var(--card);
 }
-.c1 {background:#abb194;color:#293c30}
-.c2 {background:#dbb781;color:#573d2d}
-.c3 {background:#b1c0be;color:#304849}
-.c4 {background:#c17e68;color:#492f28}
-.c5 {background:#d1c6a6;color:#51452f}
-.c6 {background:#7d8b70;color:#f3efe5}
-.c7 {background:#d5b8ae;color:#50352f}
-.c8 {background:#a9a7bd;color:#302e48}
-.album-name {display:block;margin-top:10px;font-size:11px}
+.album-name {
+  display:block;
+  margin-top:10px;
+  font-size:11px;
+}
 .album-year {font-size:10px;color:var(--green)}
-.note {
-  margin-top:25px;
+.album:hover .album-name {color:var(--orange)}
+.album-link {
+  display:inline-block;
+  margin-top:5px;
   font-size:10px;
   color:var(--green);
 }
@@ -228,16 +254,31 @@ footer {
   font-size:10px;
 }
 footer a {text-decoration:none}
+@media(max-width:900px) {
+  .albums {grid-template-columns:repeat(2,minmax(0,1fr))}
+  .hero-layout {gap:25px}
+  .hero-photo img {height:330px}
+}
 @media(max-width:650px) {
   header {align-items:flex-start;flex-direction:column}
   nav {gap:15px}
-  .hero {padding:65px 7%}
+  .hero {padding:50px 7%}
   h1 {letter-spacing:-3px}
+  .hero-layout {grid-template-columns:1fr;gap:30px}
+  .hero-photo {max-width:440px;margin:0 auto;width:100%}
+  .hero-photo img {height:340px}
   .hero-bottom {align-items:flex-start;flex-direction:column}
-  .photo-grid {grid-template-columns:1fr}
+  .photo-grid {grid-template-columns:1fr;gap:20px}
+  .photo:nth-child(2) {margin-top:0}
+  .photo img {height:300px}
   section {padding:55px 6%}
   .section-head {align-items:flex-start;flex-direction:column}
-  .albums {grid-template-columns:repeat(2,minmax(0,1fr));gap:22px 14px}
+  .albums {grid-template-columns:repeat(2,minmax(0,1fr));gap:22px 12px}
+  .album iframe {height:152px}
+}
+@media(max-width:360px) {
+  .albums {grid-template-columns:1fr}
+  .album iframe {height:152px}
 }
 </style>
 </head>
@@ -247,6 +288,7 @@ footer a {text-decoration:none}
   <a class="logo" href="#">A LITTLE PLACE FOR MAC ★</a>
   <nav>
     <a href="#about">the idea</a>
+    <a href="#moments">photos</a>
     <a href="#music">the music</a>
     <a href="#letter">my letter</a>
     <a href="#community">community</a>
@@ -255,12 +297,23 @@ footer a {text-decoration:none}
 
 <main>
 <section class="hero" id="about">
-  <span class="eyebrow">a little corner of the internet · est. 2026</span>
-  <h1>hey,<br><em>mac.</em></h1>
-  <p class="intro">
-    A little fan-made corner of the internet for the music,
-    the memories, and the person behind the songs.
-  </p>
+  <div class="hero-layout">
+    <div>
+      <span class="eyebrow">a little corner of the internet · est. 2026</span>
+      <h1>hey,<br><em>mac.</em></h1>
+      <p class="intro">
+        A little fan-made corner of the internet for the music,
+        the memories, and the person behind the songs.
+      </p>
+    </div>
+    <div class="hero-photo">
+      <img
+        src="https://commons.wikimedia.org/wiki/Special:FilePath/Mac%20Demarco%20(13301436894).jpg?width=1200"
+        alt="Mac DeMarco photographed in 2013"
+        fetchpriority="high">
+      <span class="photo-label">MAC DEMARCO · A LITTLE MOMENT ★</span>
+    </div>
+  </div>
   <div class="hero-bottom">
     <p>
       Somewhere in Uruguay, someone is listening to your music
@@ -271,24 +324,31 @@ footer a {text-decoration:none}
   </div>
 </section>
 
-<section>
+<section id="moments">
   <div class="section-head">
-    <h2>Music for<br>the in-between.</h2>
-    <span class="muted">01 / little moments</span>
+    <h2>Little moments<br>with Mac.</h2>
+    <span class="muted">01 / photographs</span>
   </div>
   <div class="photo-grid">
     <figure class="photo">
-      <img src="https://images.unsplash.com/photo-1510915361894-db8b60106cb1?auto=format&fit=crop&w=1200&q=85"
-           alt="Guitar in warm light" loading="lazy">
+      <img
+        src="https://commons.wikimedia.org/wiki/Special:FilePath/Mac%20Demarco%20(13301436894).jpg?width=1200"
+        alt="Mac DeMarco at a public event in 2013"
+        loading="lazy">
       <figcaption>somewhere between a song and a memory.</figcaption>
     </figure>
     <figure class="photo">
-      <img src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=900&q=85"
-           alt="Quiet landscape at sunset" loading="lazy">
-      <figcaption>slow days. long afternoons.</figcaption>
+      <img
+        src="https://commons.wikimedia.org/wiki/Special:FilePath/Mac%20Demarco%20(13298630144).jpg?width=1200"
+        alt="Mac DeMarco in a photograph from 2013"
+        loading="lazy">
+      <figcaption>slow days. long afternoons. good music.</figcaption>
     </figure>
   </div>
-  <p class="note">A few photographs to capture the feeling. Independent fan-made website.</p>
+  <p class="note">
+    Photographs by their respective creators via Wikimedia Commons.
+    This is an independent fan-made website.
+  </p>
 </section>
 
 <section id="music">
@@ -296,44 +356,77 @@ footer a {text-decoration:none}
     <h2>Records on repeat.</h2>
     <span class="muted">02 / the soundtrack</span>
   </div>
+
   <div class="albums">
-    <a class="album" href="https://macdemarco.bandcamp.com/" target="_blank" rel="noopener noreferrer">
-      <div class="cover c1"><span>2014 · ALBUM</span><strong>Salad<br>Days</strong><span>MAC DEMARCO ★</span></div>
-      <span class="album-name">Salad Days</span><span class="album-year">listen ↗</span>
-    </a>
-    <a class="album" href="https://macdemarco.bandcamp.com/" target="_blank" rel="noopener noreferrer">
-      <div class="cover c2"><span>2015 · MINI ALBUM</span><strong>Another<br>One</strong><span>MAC DEMARCO ★</span></div>
-      <span class="album-name">Another One</span><span class="album-year">listen ↗</span>
-    </a>
-    <a class="album" href="https://macdemarco.bandcamp.com/" target="_blank" rel="noopener noreferrer">
-      <div class="cover c3"><span>2017 · ALBUM</span><strong>This Old<br>Dog</strong><span>MAC DEMARCO ★</span></div>
-      <span class="album-name">This Old Dog</span><span class="album-year">listen ↗</span>
-    </a>
-    <a class="album" href="https://macdemarco.bandcamp.com/" target="_blank" rel="noopener noreferrer">
-      <div class="cover c4"><span>2019 · ALBUM</span><strong>Here Comes<br>the Cowboy</strong><span>MAC DEMARCO ★</span></div>
-      <span class="album-name">Here Comes the Cowboy</span><span class="album-year">listen ↗</span>
-    </a>
-    <a class="album" href="https://macdemarco.bandcamp.com/" target="_blank" rel="noopener noreferrer">
-      <div class="cover c5"><span>2023 · ALBUM</span><strong>Five Easy<br>Hot Dogs</strong><span>MAC DEMARCO ★</span></div>
-      <span class="album-name">Five Easy Hot Dogs</span><span class="album-year">listen ↗</span>
-    </a>
-    <a class="album" href="https://macdemarco.bandcamp.com/" target="_blank" rel="noopener noreferrer">
-      <div class="cover c6"><span>2023 · COLLECTION</span><strong>One Wayne<br>G</strong><span>MAC DEMARCO ★</span></div>
-      <span class="album-name">One Wayne G</span><span class="album-year">listen ↗</span>
-    </a>
-    <a class="album" href="https://macdemarco.bandcamp.com/" target="_blank" rel="noopener noreferrer">
-      <div class="cover c7"><span>2025 · ALBUM</span><strong>Guitar</strong><span>MAC DEMARCO ★</span></div>
-      <span class="album-name">Guitar</span><span class="album-year">listen ↗</span>
-    </a>
-    <a class="album" href="https://macdemarco.bandcamp.com/" target="_blank" rel="noopener noreferrer">
-      <div class="cover c8"><span>2012 · ALBUM</span><strong>2</strong><span>MAC DEMARCO ★</span></div>
-      <span class="album-name">2</span><span class="album-year">listen ↗</span>
-    </a>
+    <div class="album">
+      <iframe src="https://open.spotify.com/embed/album/1l9d1Zj9Iv2eOcdObVhdMy?utm_source=generator&theme=0"
+        title="Salad Days by Mac DeMarco on Spotify" loading="lazy"
+        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+      <span class="album-name">Salad Days</span>
+      <span class="album-year">2014 · album</span>
+    </div>
+
+    <div class="album">
+      <iframe src="https://open.spotify.com/embed/album/73A5i6uEMBa2qpGDKdZu3u?utm_source=generator&theme=0"
+        title="Another One by Mac DeMarco on Spotify" loading="lazy"
+        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+      <span class="album-name">Another One</span>
+      <span class="album-year">2015 · mini album</span>
+    </div>
+
+    <div class="album">
+      <iframe src="https://open.spotify.com/embed/album/4NNq2vwTapv4fSJcrZbPH7?utm_source=generator&theme=0"
+        title="This Old Dog by Mac DeMarco on Spotify" loading="lazy"
+        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+      <span class="album-name">This Old Dog</span>
+      <span class="album-year">2017 · album</span>
+    </div>
+
+    <div class="album">
+      <iframe src="https://open.spotify.com/embed/album/67PsnkYVPNpEsZffyTWGgW?utm_source=generator&theme=0"
+        title="Here Comes the Cowboy by Mac DeMarco on Spotify" loading="lazy"
+        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+      <span class="album-name">Here Comes the Cowboy</span>
+      <span class="album-year">2019 · album</span>
+    </div>
+
+    <div class="album">
+      <iframe src="https://open.spotify.com/embed/search/Five%20Easy%20Hot%20Dogs%20Mac%20DeMarco?utm_source=generator&theme=0"
+        title="Find Five Easy Hot Dogs by Mac DeMarco on Spotify" loading="lazy"
+        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+      <span class="album-name">Five Easy Hot Dogs</span>
+      <span class="album-year">2023 · album</span>
+    </div>
+
+    <div class="album">
+      <iframe src="https://open.spotify.com/embed/album/70hX7IYqmUGV97OXs2v848?utm_source=generator&theme=0"
+        title="One Wayne G by Mac DeMarco on Spotify" loading="lazy"
+        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+      <span class="album-name">One Wayne G</span>
+      <span class="album-year">2023 · collection</span>
+    </div>
+
+    <div class="album">
+      <iframe src="https://open.spotify.com/embed/album/2T7O7QJnesN3l3iPX1NAZY?utm_source=generator&theme=0"
+        title="Guitar by Mac DeMarco on Spotify" loading="lazy"
+        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+      <span class="album-name">Guitar</span>
+      <span class="album-year">2025 · album</span>
+    </div>
+
+    <div class="album">
+      <iframe src="https://open.spotify.com/embed/album/7x6wYKbZUU2BL3N8ZWwM3q?utm_source=generator&theme=0"
+        title="2 by Mac DeMarco on Spotify" loading="lazy"
+        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+      <span class="album-name">2</span>
+      <span class="album-year">2012 · album</span>
+    </div>
   </div>
+
   <p class="note">
-    These are original typographic fan designs, not official album artwork.
-    Visit <a href="https://macdemarco.bandcamp.com/" target="_blank" rel="noopener noreferrer">Mac's Bandcamp ↗</a>
-    for music and official releases.
+    Album artwork and music are displayed through Spotify embeds.
+    Listen to more releases on
+    <a href="https://macdemarco.bandcamp.com/music" target="_blank" rel="noopener noreferrer">Mac's official Bandcamp ↗</a>.
   </p>
 </section>
 
@@ -402,8 +495,6 @@ footer a {text-decoration:none}
   <span>NOT OFFICIAL · JUST A FAN</span>
   <a href="#about">BACK TO TOP ↑</a>
 </footer>
-
-<!-- GISCUS: REPLACE THE FOUR PLACEHOLDERS BELOW -->
 
 <script src="https://giscus.app/client.js"
         data-repo="baezthiago317-cmd/macdemarco-fan"
